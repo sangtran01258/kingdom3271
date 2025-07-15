@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kingdom 3271</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("image/bg-3271.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #fff;
+      }
+
+      .wrapper {
+        max-width: 1100px;
+        margin: auto;
+        padding: 20px;
+      }
+
+      .intro-box {
+        background-image: url("image/rok.png");
+        background-size: cover;
+        background-position: center;
+        padding: 60px 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .intro-box::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 20px;
+      }
+
+      .intro-box h1,
+      .intro-box p {
+        position: relative;
+        z-index: 1;
+      }
+
+      .intro-box h1 {
+        font-size: 2.8em;
+        margin: 0;
+      }
+
+      .intro-box p {
+        font-size: 1.2em;
+      }
+
+      .kings-grid {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+
+      .king-box {
+        background-color: #222;
+        width: 23%;
+        aspect-ratio: 1/1;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .king-box:hover {
+        background-color: #333;
+      }
+
+      .section-grid {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .section-box {
+        background-color: #1e1e1e;
+        width: 32%;
+        aspect-ratio: 1/1;
+        border-radius: 10px;
+        padding: 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+
+      .section-box:hover {
+        background-color: #2a2a2a;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: rgba(34, 34, 34, 0.95);
+        padding: 20px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        position: relative;
+        backdrop-filter: blur(6px);
+        border: 1px solid #555;
+      }
+
+      .modal-content img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #fff;
+        font-size: 1.5em;
+        cursor: pointer;
+      }
+
+      .leaders-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .leader-box {
+        background-color: #333;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .leader-box:hover {
+        background-color: #444;
+      }
+
+      footer {
+        text-align: center;
+        color: #aaa;
+        margin-top: 40px;
+        font-size: 0.8em;
+      }
+
+      @media (max-width: 768px) {
+        .king-box,
+        .section-box {
+          width: 48%;
+          margin-bottom: 15px;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .king-box,
+        .section-box {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="intro-box">
+        <h1>Vương quốc 3271</h1>
+        <p>
+          Nơi hội tụ những chiến binh mạnh mẽ và đoàn kết trong Rise of
+          Kingdoms.
+        </p>
+      </div>
+
+      <div class="kings-grid">
+        <div class="king-box" onclick="openModal('cap')">
+          <img src="image/cap2.png" alt="CapNguyen" class="king-img" />
+          <div>👑 CapNguyen</div>
+        </div>
+        <div class="king-box" onclick="openModal('thayty')">
+          <img src="image/thayty2.png" alt="Thầy Ty" class="king-img" />
+          <div>👑 Thầy Ty</div>
+        </div>
+        <div class="king-box" onclick="openModal('luis')">
+          <img src="image/luis2.png" alt="Luis" class="king-img" />
+          <div>👑 Luis</div>
+        </div>
+        <div class="king-box" onclick="openModal('blackbi')">
+          <img src="image/bi2.png" alt="Black Bi" class="king-img" />
+          <div>👑 Black Bi</div>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <!-- Team Leader -->
+        <div class="section-box" onclick="openModal('leaders')">
+          <h3>🧭 Team Leader</h3>
+          <p>Đây là nơi quy tụ tất cả các Leader của vương quốc.</p>
+          <p>
+            Mỗi người phụ trách một mảng riêng biệt như chiến thuật, ngoại giao,
+            tài chính hoặc sự kiện.
+          </p>
+          <p>
+            Hãy nhắn tin trực tiếp cho đúng Leader khi cần hỗ trợ để được giải
+            đáp nhanh và chính xác nhất.
+          </p>
+        </div>
+
+        <!-- Luật Kingdom -->
+        <div class="section-box" onclick="openModal('rules')">
+          <h3>📜 Luật Kingdom</h3>
+          <p>Chào mừng bạn đến với vương quốc 3271!</p>
+          <p>
+            Đây là bộ quy tắc nền tảng để giữ vững sự đoàn kết và kỷ luật chung.
+          </p>
+          <p>
+            ❗ Mọi hành vi phá hoại hoặc vi phạm sẽ bị xử lý nghiêm — không có
+            ngoại lệ.
+          </p>
+        </div>
+
+        <!-- Sự kiện -->
+        <div class="section-box" onclick="openModal('events')">
+          <h3>🎉 Sự kiện</h3>
+          <p>Chúng tôi tổ chức nhiều hoạt động sôi nổi như:</p>
+          <p>
+            ⚔️ Ark, KvK, war, giải đấu nội bộ<br />💰 Donate event, đố vui, mini
+            game, và hơn thế nữa!
+          </p>
+          <p>
+            Hãy cùng tham gia để gắn kết cộng đồng và nhận những phần quà hấp
+            dẫn!
+          </p>
+        </div>
+      </div>
+
+      <footer>&copy; 2025 Kingdom 3271 - All rights reserved.</footer>
+    </div>
+
+    <!-- Modal CapNguyen -->
+    <div id="modal-cap" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('cap')">&times;</span>
+        <h2>👑 CapNguyen</h2>
+        <img src="image/cap.png" alt="CapNguyen" class="modal-king-img" />
+        <p>Thời gian: KvK 6 - Now</p>
+        <p>Nhiệm vụ: Ăn ngủ đúng giờ dậy zero thành viên trong liên minh.</p>
+      </div>
+    </div>
+
+    <!-- Modal Thầy Ty -->
+    <div id="modal-thayty" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('thayty')">&times;</span>
+        <h2>👑 Thầy Ty</h2>
+        <img src="image/thayty.png" alt="Thầy Ty" class="modal-king-img" />
+        <p>Thời gian: KvK 6 - Now</p>
+        <p>Nhiệm vụ: Tuyển thành viên, buff king.</p>
+      </div>
+    </div>
+
+    <!-- Modal Luis -->
+    <div id="modal-luis" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('luis')">&times;</span>
+        <h2>👑 Luis</h2>
+        <img src="image/luis.png" alt="Luis" class="modal-king-img" />
+        <p>Thời gian: KvK 6 - Now</p>
+        <p>Nhiệm vụ: Rally lead, phân phối garrison, phát động war.</p>
+      </div>
+    </div>
+
+    <!-- Modal Black Bi -->
+    <div id="modal-blackbi" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('blackbi')">&times;</span>
+        <h2>👑 Black Bi</h2>
+        <img src="image/bi.png" alt="Black Bi" class="modal-king-img" />
+        <p>Thời gian: KvK 6 - Now</p>
+        <p>Nhiệm vụ: Chọc cho CAP giận để bị zero.</p>
+      </div>
+    </div>
+
+    <!-- Modal Rules -->
+    <div id="modal-rules" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('rules')">&times;</span>
+        <h2>📜 Luật lệ Vương quốc</h2>
+        <ul style="text-align: left; padding-left: 20px">
+          <li>
+            <strong>Zone & đánh nhau</strong>:
+            <ul>
+              <li>
+                ✅ Tôn trọng lãnh thổ và thành viên khác trong vương quốc. Không
+                dịch chuyển (TP) hoặc đặt cờ gây cản trở liên minh khác.
+              </li>
+              <li>
+                🤝 Nếu có mâu thuẫn cá nhân, ưu tiên báo cáo với R4 hoặc R5 để
+                được hoà giải.
+              </li>
+              <li>
+                ❗ Việc đánh thành phố người khác chỉ được thực hiện theo chỉ
+                đạo của các Leader.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Giao tiếp & cộng đồng</strong>:
+            <ul>
+              <li>🗣️ Tôn trọng người chơi khác, không toxic/spam/khiếm nhã.</li>
+              <li>🛡️ Giao tiếp lịch sự, xây dựng và đoàn kết.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>KvK & War</strong>:
+            <ul>
+              <li>
+                🧭 Tuân thủ chiến thuật chung, rally/garrison theo phân công.
+              </li>
+              <li>⏰ Có mặt đúng giờ khi war, báo trước nếu vắng mặt.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Liên minh phụ & acc farm</strong>:
+            <ul>
+              <li>👥 Tối đa 2 acc farm/người chơi.</li>
+              <li>
+                🧾 Acc farm cần đăng ký, gắn tag rõ ràng, không chiếm zone chiến
+                lược.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Donate & Bank</strong>:
+            <ul>
+              <li>💰 Quỹ donate minh bạch, công bố rõ ràng.</li>
+              <li>🏦 Bank do R5 ủy quyền quản lý.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Vi phạm & hình phạt</strong>:
+            <ul>
+              <li>⚠️ Lần 1: Cảnh cáo công khai.</li>
+              <li>🚫 Lần 2: Cấm vào liên minh một ngày.</li>
+              <li>🔨 Tái phạm: Zero !!!</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Modal Events -->
+    <div id="modal-events" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('events')">&times;</span>
+        <h2>🎉 Hoạt động & Sự kiện</h2>
+        <ul style="text-align: left; line-height: 1.6; padding-left: 20px">
+          <li style="margin-bottom: 10px">
+            ⚔️ <strong>Ark of Osiris:</strong> Tham gia chiến đấu theo lịch. Sắp
+            xếp đội hình và chiến thuật bài bản.
+          </li>
+          <li style="margin-bottom: 10px">
+            🌍 <strong>KvK:</strong> Thực hiện rally/garrison theo chỉ đạo R5.
+            Ưu tiên teamwork, báo danh đúng giờ khi war.
+          </li>
+          <li style="margin-bottom: 10px">
+            🎁 <strong>Event cộng đồng:</strong> Đố vui, mini game, donate nhận
+            quà, hoạt động tương tác trên Discord và in-game.
+          </li>
+          <li style="margin-bottom: 10px">
+            🏆 <strong>Giải đấu nội bộ:</strong> Tạo đội giao lưu Ark of Osiris.
+          </li>
+          <li style="margin-bottom: 10px">
+            💰 <strong>Quỹ donate:</strong> Công khai, minh bạch. Dùng cho war,
+            phần thưởng sự kiện, hỗ trợ tài nguyên chiến lược.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Modal Leader List -->
+    <div id="modal-leaders" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('leaders')">&times;</span>
+        <h2>🧭 Danh sách Team Leaders</h2>
+        <div class="leaders-grid">
+          <div class="leader-box" onclick="openLeader('Rin')">Rin</div>
+          <div class="leader-box" onclick="openLeader('Eren')">Eren</div>
+          <div class="leader-box" onclick="openLeader('Lyn')">Lyn</div>
+          <div class="leader-box" onclick="openLeader('HeoMap')">Heo Mập</div>
+          <div class="leader-box" onclick="openLeader('ChuHieu')">Chu Hiếu</div>
+          <div class="leader-box" onclick="openLeader('TankerTL')">
+            Tanker TL
+          </div>
+          <div class="leader-box" onclick="openLeader('Di7')">Dì 7</div>
+          <div class="leader-box" onclick="openLeader('BLUE')">BLUE</div>
+          <div class="leader-box" onclick="openLeader('Neos')">Neos</div>
+          <div class="leader-box" onclick="openLeader('Ron')">Ron</div>
+          <div class="leader-box" onclick="openLeader('AzThanh')">AzThành</div>
+          <div class="leader-box" onclick="openLeader('BuBu')">BuBu</div>
+          <div class="leader-box" onclick="openLeader('Dikiy')">Dikiy</div>
+          <div class="leader-box" onclick="openLeader('Cosmos')">Cosmos</div>
+          <div class="leader-box" onclick="openLeader('FknrhinoF')">
+            Fknrhino F
+          </div>
+          <div class="leader-box" onclick="openLeader('Zyka')">Zyka</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Leader Detail -->
+    <div id="modal-leader-detail" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeLeaderDetail()">&times;</span>
+        <h2 id="leaderName">Tên Leader</h2>
+        <p id="leaderRole">Vai trò: ...</p>
+        <p id="leaderDesc">Thông tin chi tiết...</p>
+      </div>
+    </div>
+
+    <script>
+      function openModal(id) {
+        document.getElementById("modal-" + id).style.display = "flex";
+      }
+
+      function closeModal(id) {
+        document.getElementById("modal-" + id).style.display = "none";
+      }
+
+      function openLeader(id) {
+        const info = {
+          Rin: {
+            name: "Rin",
+            role: "Lead war",
+            desc: "Lead war, key def, rally",
+          },
+          Eren: {
+            name: "Eren",
+            role: "Chiến thuật",
+            desc: "Lên chiến thuật chính, vẽ cờ, lãnh thổ",
+          },
+          Lyn: {
+            name: "Lyn",
+            role: "Sự kiện MGE",
+            desc: "Quản lý MGE và các sự kiện 20 trọc vàng",
+          },
+          HeoMap: {
+            name: "Heo Mập",
+            role: "Lãnh thổ farm",
+            desc: "Quản lý lãnh thổ và liên minh farm SG",
+          },
+          ChuHieu: { name: "Chu Hiếu", role: "Bank", desc: "Quản lý bank" },
+          TankerTL: {
+            name: "Tanker TL",
+            role: "Farm ST",
+            desc: "Quản lý liên minh farm ST",
+          },
+          Di7: { name: "Dì 7", role: "Lead war", desc: "Lead war" },
+          BLUE: { name: "BLUE", role: "Xây cờ", desc: "Leader đội xây cờ" },
+          Neos: {
+            name: "Neos",
+            role: "Vé bay & nghỉ",
+            desc: "Quản lý vé bay, vé nghỉ",
+          },
+          Ron: {
+            name: "Ron",
+            role: "AoO Team 1",
+            desc: "Leader Ark of Osiris team 1 SW",
+          },
+          AzThanh: {
+            name: "AzThành",
+            role: "Lead war múi giờ khác",
+            desc: "Lead war, key def, rally trái múi giờ Việt Nam",
+          },
+          BuBu: {
+            name: "BuBu",
+            role: "Key def & quốc tế",
+            desc: "Key def, quản lý người chơi nước ngoài",
+          },
+          Dikiy: {
+            name: "Dikiy",
+            role: "Người Nga",
+            desc: "Quản lý team người Nga",
+          },
+          Cosmos: {
+            name: "Cosmos",
+            role: "Lead war Nga",
+            desc: "Lead war team người Nga",
+          },
+          FknrhinoF: {
+            name: "Fknrhino F",
+            role: "Bank & farm SD",
+            desc: "Quản lý bank và liên minh farm SD",
+          },
+          Zyka: {
+            name: "Zyka",
+            role: "Bảo vệ cờ",
+            desc: "Leader đội bảo vệ cờ",
+          },
+        };
+
+        const data = info[id] || {
+          name: id,
+          role: "",
+          desc: "Thông tin đang cập nhật.",
+        };
+        document.getElementById("leaderName").textContent = data.name;
+        document.getElementById("leaderRole").textContent =
+          "Vai trò: " + data.role;
+        document.getElementById("leaderDesc").textContent = data.desc;
+        document.getElementById("modal-leader-detail").style.display = "flex";
+      }
+
+      function closeLeaderDetail() {
+        document.getElementById("modal-leader-detail").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
