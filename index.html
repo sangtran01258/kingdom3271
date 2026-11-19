@@ -4,183 +4,26 @@
     <meta charset="UTF-8" />
     <title>Kingdom 3271</title>
     <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-image: url("image/bg-3271.png");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        color: #fff;
-      }
-
-      .wrapper {
-        max-width: 1100px;
-        margin: auto;
-        padding: 20px;
-      }
-
-      .intro-box {
-        background-image: url("image/rok.png");
-        background-size: cover;
-        background-position: center;
-        padding: 60px 30px;
-        border-radius: 20px;
-        margin-bottom: 30px;
-        text-align: center;
-        position: relative;
-      }
-
-      .intro-box::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.6);
-        border-radius: 20px;
-      }
-
-      .intro-box h1,
-      .intro-box p {
-        position: relative;
-        z-index: 1;
-      }
-
-      .intro-box h1 {
-        font-size: 2.8em;
-        margin: 0;
-      }
-
-      .intro-box p {
-        font-size: 1.2em;
-      }
-
-      .kings-grid {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-bottom: 30px;
-      }
-
-      .king-box {
-        background-color: #222;
-        width: 23%;
-        aspect-ratio: 1/1;
-        border-radius: 10px;
-        padding: 10px;
-        text-align: center;
-        box-sizing: border-box;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      .king-box:hover {
-        background-color: #333;
-      }
-
-      .section-grid {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-
-      .section-box {
-        background-color: #1e1e1e;
-        width: 32%;
-        aspect-ratio: 1/1;
-        border-radius: 10px;
-        padding: 20px;
-        box-sizing: border-box;
-        cursor: pointer;
-      }
-
-      .section-box:hover {
-        background-color: #2a2a2a;
-      }
-
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 10;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .modal-content {
-        background-color: rgba(34, 34, 34, 0.95);
-        padding: 20px;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 500px;
-        text-align: center;
-        position: relative;
-        backdrop-filter: blur(6px);
-        border: 1px solid #555;
-      }
-
-      .modal-content img {
-        width: 100%;
-        border-radius: 10px;
-        margin-bottom: 10px;
-      }
-
-      .close {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        color: #fff;
-        font-size: 1.5em;
-        cursor: pointer;
-      }
-
-      .leaders-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 10px;
-        margin-top: 15px;
-      }
-
-      .leader-box {
-        background-color: #333;
-        padding: 10px;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: 0.2s;
-      }
-
-      .leader-box:hover {
-        background-color: #444;
-      }
-
-      footer {
-        text-align: center;
-        color: #aaa;
-        margin-top: 40px;
-        font-size: 0.8em;
-      }
-
-      @media (max-width: 768px) {
-        .king-box,
-        .section-box {
-          width: 48%;
-          margin-bottom: 15px;
-        }
-      }
-
-      @media (max-width: 500px) {
-        .king-box,
-        .section-box {
-          width: 100%;
-        }
-      }
-    </style>
+:root{color-scheme:dark;--gold:#e8c477;--bright:#f6dda0;--panel:rgba(20,27,39,.9);--muted:#b9c1ce;--line:rgba(232,196,119,.22)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#f7f4ed;background:linear-gradient(180deg,rgba(8,12,20,.72),rgba(8,12,20,.94)),url("image/bg-3271.png") center/cover fixed;line-height:1.65}
+.wrapper{width:min(1120px,calc(100% - 36px));margin:auto;padding:34px 0 24px}
+.intro-box{position:relative;isolation:isolate;overflow:hidden;min-height:300px;display:grid;place-content:center;text-align:center;padding:56px 28px;margin-bottom:34px;border:1px solid var(--line);border-radius:26px;background:linear-gradient(115deg,rgba(9,14,23,.86),rgba(9,14,23,.42)),url("image/rok.png") center 42%/cover;box-shadow:0 24px 70px #0006}
+.intro-box h1{margin:0;color:var(--bright);font-family:Georgia,serif;font-size:clamp(2.5rem,7vw,4.6rem);line-height:1.08;letter-spacing:.035em;text-shadow:0 4px 24px #000a}
+.intro-box p{max-width:620px;margin:18px auto 0;color:#f0e9dc;font-size:clamp(1rem,2vw,1.15rem)}.intro-box p:before{content:"KINGDOM • 3271";display:block;margin-bottom:12px;color:var(--gold);font-size:.72rem;font-weight:800;letter-spacing:.28em}
+.kings-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-bottom:38px}
+.king-box{min-width:0;padding:12px 12px 17px;overflow:hidden;text-align:center;color:#fff;background:linear-gradient(160deg,rgba(37,47,63,.96),rgba(17,23,34,.96));border:1px solid var(--line);border-radius:18px;cursor:pointer;box-shadow:0 12px 30px #0004;transition:transform .22s,border-color .22s,box-shadow .22s}
+.king-box:hover{transform:translateY(-6px);border-color:#f6dda0b3;box-shadow:0 18px 38px #0006}.king-img{display:block;width:100%;height:190px;object-fit:contain;border-radius:12px;background:#ffffff09}.king-box div{padding-top:13px;color:var(--bright);font-weight:750;letter-spacing:.02em}
+.section-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.section-box{min-width:0;padding:25px 23px;border-radius:18px;border:1px solid #ffffff17;border-top:2px solid var(--gold);background:var(--panel);cursor:pointer;backdrop-filter:blur(12px);box-shadow:0 12px 32px #0004;transition:transform .2s,background .2s}
+.section-box:hover{transform:translateY(-4px);background:rgba(31,41,57,.96)}.section-box h3{margin:0 0 13px;color:var(--bright);font-size:1.2rem}.section-box p{margin:9px 0;color:var(--muted);font-size:.94rem}
+.modal{display:none;position:fixed;z-index:20;inset:0;padding:20px;background:#03060cd1;backdrop-filter:blur(9px);justify-content:center;align-items:center}.modal-content{position:relative;width:min(560px,100%);max-height:min(86vh,850px);overflow:auto;padding:30px;border:1px solid var(--line);border-radius:20px;color:#f5f2eb;text-align:center;background:linear-gradient(145deg,rgba(35,44,59,.98),rgba(14,20,31,.98));box-shadow:0 28px 90px #0009}
+.modal-content h2{margin:4px 30px 18px;color:var(--bright);font-family:Georgia,serif}.modal-content p,.modal-content li{color:#d1d7e0}.modal-content ul{text-align:left;line-height:1.7}.modal-content img{display:block;width:min(100%,360px);max-height:330px;object-fit:contain;margin:0 auto 18px;border-radius:14px}
+.close{position:absolute;top:12px;right:17px;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;color:#fff;background:#ffffff17;font-size:1.5rem;cursor:pointer}.close:hover{background:#e8c47733;color:var(--bright)}
+.leaders-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}.leader-box{padding:12px 8px;border:1px solid #e8c4772b;border-radius:10px;color:#f4ead4;background:#ffffff0e;cursor:pointer;transition:.18s}.leader-box:hover{background:#e8c47726;border-color:var(--gold)}
+footer{margin-top:42px;padding:20px 0 4px;border-top:1px solid #ffffff1a;color:#98a2b2;text-align:center;font-size:.82rem;letter-spacing:.04em}
+@media(max-width:800px){.kings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-grid{grid-template-columns:1fr}.king-img{height:210px}}
+@media(max-width:480px){.wrapper{width:calc(100% - 22px);padding-top:12px}.intro-box{min-height:250px;padding:38px 18px;border-radius:18px}.king-img{height:155px}.king-box{padding:9px 9px 13px}.section-box{padding:21px 18px}.modal-content{padding:25px 18px}.leaders-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
   </head>
   <body>
     <div class="wrapper">
@@ -192,6 +35,7 @@
         </p>
       </div>
 
+      <h2 style="color:#f6dda0;font-family:Georgia,serif;letter-spacing:.04em;margin:0 0 16px;">👑 Ban lãnh đạo Kingdom</h2>
       <div class="kings-grid">
         <div class="king-box" onclick="openModal('cap')">
           <img src="image/cap2.png" alt="CapNguyen" class="king-img" />
@@ -211,6 +55,7 @@
         </div>
       </div>
 
+      <h2 style="color:#f6dda0;font-family:Georgia,serif;letter-spacing:.04em;margin:0 0 16px;">🏰 Thông tin vương quốc</h2>
       <div class="section-grid">
         <!-- Team Leader -->
         <div class="section-box" onclick="openModal('leaders')">
@@ -438,6 +283,10 @@
     </div>
 
     <script>
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") document.querySelectorAll(".modal").forEach((modal) => modal.style.display = "none");
+      });
+
       function openModal(id) {
         document.getElementById("modal-" + id).style.display = "flex";
       }
